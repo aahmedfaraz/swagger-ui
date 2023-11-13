@@ -18,3 +18,7 @@ This repo contains practice on the Swagger UI to see how we can add API document
 - [Swagger UI - OpenAPI v2 Live Demo](https://petstore.swagger.io/)
 - [Swagger UI - OpenAPI v3 Live Demo](https://petstore3.swagger.io/)
 - [Swagger Editor Live Demo](https://editor.swagger.io/)
+
+### Recommended Tutorials ⭐⭐⭐⭐⭐
+- [What is the Swagger documentation flow?](https://www.youtube.com/watch?v=scVliTfB3bU&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&index=3)
+- [How to write YAML using Swagger Editor?](https://www.youtube.com/watch?v=GE3QT05hWs4&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&index=4)
