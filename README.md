@@ -9,6 +9,7 @@ This repo contains practice on the Swagger UI to see how we can add API document
 ### Documentation 📖
 - [Swagger UI Docs](https://swagger.io/tools/swagger-ui/)
 - [Swagger Editor Docs](https://swagger.io/tools/swagger-editor/)
+- [OpenAPI Specifications - YAML Schema](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#schema)
 
 ### Github Repositories 🧑🏻‍💻
 - [Swagger UI Repo](https://github.com/swagger-api/swagger-ui)
@@ -19,6 +20,6 @@ This repo contains practice on the Swagger UI to see how we can add API document
 - [Swagger UI - OpenAPI v3 Live Demo](https://petstore3.swagger.io/)
 - [Swagger Editor Live Demo](https://editor.swagger.io/)
 
-### Recommended Tutorials ⭐⭐⭐⭐⭐
+# Recommended Tutorials ⭐⭐⭐⭐⭐
 - [What is the Swagger documentation flow?](https://www.youtube.com/watch?v=scVliTfB3bU&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&index=3)
 - [How to write YAML using Swagger Editor?](https://www.youtube.com/watch?v=GE3QT05hWs4&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&index=4)
