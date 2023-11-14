@@ -14,3 +14,22 @@ body {
     margin: 0;
     background: #fafafa;
 }
+
+.topbar form {
+    width: 100% !important;
+}
+
+.topbar input {
+    border-color: #3166E8 !important;
+    max-width: 100% !important;
+}
+
+.topbar button {
+    background-color: #3166E8 !important;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
