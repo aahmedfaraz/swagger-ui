@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  title: Road2Crypto API Documentation
+  description: |-
+    Github repository of Road2Crypto API Documentation: [https://github.com/Road2Crypto/api-docs](https://github.com/Road2Crypto/api-docs)
+  version: 1.0.0
+servers:
+  - url: https://api.road2crypto.com
+tags:
+  - name: Auth
+    description: Endpoints for authentication
+    externalDocs:
+      description: Github Code
+      url: https://github.com/Road2Crypto/backend
+security: # Global security requirement
+  - Client-token: []
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - Auth
+      summary: Add User
+      description: Create a new user in the Cognito user Pool
+      operationId: signup
+      parameters:
+        - name: email
+          in: header
+          description: User email address
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: header
+          description: Password - must be min 6 characters
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Request object sample
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                userCreated:
+                  value:
+                    message: "User created successfully"
+                    statusCode: 200
+        '400':
+          description: Invalid input fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                invalidInput:
+                  value:
+                    message: "Invalid input fields"
+                    statusCode: 400
+        '409':
+          description: User already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                userExists:
+                  value:
+                    message: "User already exists"
+                    statusCode: 409
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                serverError:
+                  value:
+                    message: "Internal Server Error"
+                    statusCode: 500
+  /auth/signin:
+    post:
+      tags:
+        - Auth
+      summary: Authorize User
+      description: Log in user
+      operationId: login
+      parameters:
+        - name: email
+          in: header
+          description: User email address
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: header
+          description: Password - must be min 6 characters
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Request object sample
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                userAuthenticated:
+                  value:
+                    message: "User authenticated successfully"
+                    accessToken: "<jwt-token>"
+                    refreshToken: "<jwt-token>"
+                    sub: "<cognito_user_id>"
+                    statusCode: 200
+        '400':
+          description: Missing any input field (OR) Invalid email or password below 6 digits
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                invalidInput:
+                  value:
+                    message: "Invalid input fields (OR) Invalid input"
+                    statusCode: 400
+        '401':
+          description: User does not exist or wrong password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                invalidCredentials:
+                  value:
+                    message: "Invalid credentials"
+                    statusCode: 401
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+              examples:
+                authError:
+                  value:
+                    message: "An error occurred during authentication. Please try again."
+                    statusCode: 500
+components:
+  schemas:
+    UserAuth:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+      required:
+        - email
+        - password
+  securitySchemes:
+    Client-token:
+      type: apiKey
+      name: x-client-token-web
+      in: header
