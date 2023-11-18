@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "Road2Crypto API Documentation",
     "description": "Github repository of Road2Crypto API Documentation: [https://github.com/Road2Crypto/api-docs](https://github.com/Road2Crypto/api-docs)",
@@ -20,20 +20,34 @@
       }
     }
   ],
+  "security": [
+    {
+      "Client-token": []
+    }
+  ],
   "paths": {
-    "/internal/auth/signup": {
+    "/auth/signup": {
       "post": {
         "tags": [
           "Auth"
         ],
         "summary": "Add User",
-        "description": "Add User using Signup",
+        "description": "Create a new user in the Cognito user Pool",
         "operationId": "signup",
         "parameters": [
           {
-            "name": "x-client-token",
+            "name": "email",
             "in": "header",
-            "description": "Client Authorization Token",
+            "description": "User email address",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "header",
+            "description": "Password - must be min 6 characters",
             "required": true,
             "schema": {
               "type": "string"
@@ -41,21 +55,21 @@
           }
         ],
         "requestBody": {
-          "description": "Created user object",
+          "description": "Request object sample",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserAuth"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserAuth"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserAuth"
               }
             }
           }
@@ -69,12 +83,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "User created successfully"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 200
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "userCreated": {
+                    "value": {
+                      "message": "User created successfully",
+                      "statusCode": 200
                     }
                   }
                 }
@@ -89,12 +109,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "Invalid input fields"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 400
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "invalidInput": {
+                    "value": {
+                      "message": "Invalid input fields",
+                      "statusCode": 400
                     }
                   }
                 }
@@ -109,12 +135,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "User already exists"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 409
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "userExists": {
+                    "value": {
+                      "message": "User already exists",
+                      "statusCode": 409
                     }
                   }
                 }
@@ -129,12 +161,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "Internal Server Error"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 500
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "serverError": {
+                    "value": {
+                      "message": "Internal Server Error",
+                      "statusCode": 500
                     }
                   }
                 }
@@ -144,19 +182,28 @@
         }
       }
     },
-    "/internal/auth/signin": {
+    "/auth/signin": {
       "post": {
         "tags": [
           "Auth"
         ],
         "summary": "Authorize User",
-        "description": "Authorize User using login",
+        "description": "Log in user",
         "operationId": "login",
         "parameters": [
           {
-            "name": "x-client-token",
+            "name": "email",
             "in": "header",
-            "description": "Client Authorization Token",
+            "description": "User email address",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "header",
+            "description": "Password - must be min 6 characters",
             "required": true,
             "schema": {
               "type": "string"
@@ -164,21 +211,21 @@
           }
         ],
         "requestBody": {
-          "description": "Created user object",
+          "description": "Request object sample",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserAuth"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserAuth"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserAuth"
               }
             }
           }
@@ -192,20 +239,27 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "User authenticated successfully"
+                      "type": "string"
                     },
                     "accessToken": {
-                      "type": "string",
-                      "example": "<jwt-token>"
+                      "type": "string"
                     },
                     "refreshToken": {
-                      "type": "string",
-                      "example": "<jwt-token>"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 200
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "userAuthenticated": {
+                    "value": {
+                      "message": "User authenticated successfully",
+                      "accessToken": "<jwt-token>",
+                      "refreshToken": "<jwt-token>",
+                      "sub": "<cognito_user_id>",
+                      "statusCode": 200
                     }
                   }
                 }
@@ -220,12 +274,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "Invalid input fields (OR) Invalid input"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 400
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "invalidInput": {
+                    "value": {
+                      "message": "Invalid input fields (OR) Invalid input",
+                      "statusCode": 400
                     }
                   }
                 }
@@ -240,12 +300,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "Invalid credentials"
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 401
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "invalidCredentials": {
+                    "value": {
+                      "message": "Invalid credentials",
+                      "statusCode": 401
                     }
                   }
                 }
@@ -260,12 +326,18 @@
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "example": "An error occurred during authentication. Please try again."
+                      "type": "string"
                     },
                     "statusCode": {
-                      "type": "number",
-                      "example": 500
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "authError": {
+                    "value": {
+                      "message": "An error occurred during authentication. Please try again.",
+                      "statusCode": 500
                     }
                   }
                 }
@@ -278,21 +350,29 @@
   },
   "components": {
     "schemas": {
-      "User": {
+      "UserAuth": {
         "type": "object",
         "properties": {
           "email": {
             "type": "string",
-            "example": "john@email.com"
+            "format": "email"
           },
           "password": {
             "type": "string",
-            "example": "123456"
+            "format": "password"
           }
         },
-        "xml": {
-          "name": "user"
-        }
+        "required": [
+          "email",
+          "password"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "Client-token": {
+        "type": "apiKey",
+        "name": "x-client-token-web",
+        "in": "header"
       }
     }
   }
