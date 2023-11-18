@@ -2,11 +2,11 @@
  * @prettier
  */
 import React from "react"
-import SwaggerUILogo from "../assets/logo-dashboard-mobile-dark.svg"
+import image from "../assets/ahmed-faraz-logo.png"
 
 const Logo = () => (
   <div className="logo-container">
-    <SwaggerUILogo height="40" />
+    <img height={40} src={image} />
   </div>
 )
 

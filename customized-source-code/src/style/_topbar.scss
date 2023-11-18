@@ -1,8 +1,9 @@
 .topbar
 {
-    padding: 10px 0;
+    padding: 20px 0;
 
     background-color: $topbar-background-color;
+    border-bottom: 1px solid $logo-main-color;
     .topbar-wrapper
     {
         display: flex;

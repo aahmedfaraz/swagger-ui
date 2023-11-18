@@ -32,7 +32,7 @@ $scampi-purple: #55a !default;
 $electric-violet: #7300e5 !default;
 $persian-red: #cf3030 !default;
 $mango-tango: #e97500 !default;
-$r2c810-light: #3166E8 !default;
+$logo-main-color: #F15A29 !default;
 
 // Theme
 
@@ -214,13 +214,13 @@ $table-parameter-deprecated-font-color: $color-danger !default;
 
 // Topbar
 
-$topbar-background-color: $cod-gray !default;
+$topbar-background-color: rgb(255, 255, 255) !default;
 
 $topbar-link-font-color: $white !default;
 
-$topbar-download-url-wrapper-element-border-color: $r2c810-light !default;
+$topbar-download-url-wrapper-element-border-color: $logo-main-color !default;
 
-$topbar-download-url-button-background-color: $r2c810-light !default;
+$topbar-download-url-button-background-color: $logo-main-color !default;
 $topbar-download-url-button-font-color: $white !default;
 
 // Type
